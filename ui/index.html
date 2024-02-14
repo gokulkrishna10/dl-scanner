@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver's License Data Extractor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Driver's License Data Extractor</h1>
+    <video id="webcam" autoplay playsinline width="640" height="480"></video>
+    <button id="capture">Capture</button>
+<!-- Hide the canvas element as it's used only for capturing the image -->
+    <canvas id="canvas" width="300" height="200" style="display:none;"></canvas>
+<!-- Hide the results element at the start -->
+    <div id="results" style="display: none"></div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

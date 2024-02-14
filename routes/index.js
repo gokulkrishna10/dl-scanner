@@ -1,7 +1,7 @@
 const extractImageDataController = require('../controllers/dlScannerController')
 
-exports.extractImageData = function (req, res) {
-    extractImageDataController.extractImageData(req, (err, response) => {
+exports.extractImageData = async function (req, res) {
+    await extractImageDataController.extractImageData(req, (err, response) => {
         if (err) {
             res.status(err.code ? err.code : 500).send(err)
         } else {

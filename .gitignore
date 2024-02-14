@@ -3,3 +3,4 @@ package-lock.json
 .idea/
 env.json
 uploads
+src/python/venv
