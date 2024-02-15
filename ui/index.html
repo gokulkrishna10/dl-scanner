@@ -9,12 +9,37 @@
 <body>
 <div class="container">
     <h1>Driver's License Data Extractor</h1>
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modal-results" class="modal-results"></div>
+        </div>
+    </div>
+
     <video id="webcam" autoplay playsinline width="640" height="480"></video>
     <button id="capture">Capture</button>
-<!-- Hide the canvas element as it's used only for capturing the image -->
+
+    <div id="loader" class="loader" style="display: none;"></div>
+
+    <!--    file upload container-->
+    <div class="file-upload-container">
+
+        <!--        file-drop-area-->
+        <div id="file-drop-area" class="file-drop-area">
+            <span class="upload-btn">Choose a file</span>
+            <span class="file-msg">or drag and drop here</span>
+            <input type="file" class="file-input" hidden>
+        </div>
+
+        <!--        gives info of whether a file is selected or not -->
+        <div id="file-info" class="file-info"></div>
+    </div>
+
+    <!-- Hide the canvas element as it's used only for capturing the image -->
     <canvas id="canvas" width="300" height="200" style="display:none;"></canvas>
-<!-- Hide the results element at the start -->
-    <div id="results" style="display: none"></div>
+
 </div>
 <script src="script.js"></script>
 </body>

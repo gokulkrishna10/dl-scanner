@@ -34,46 +34,160 @@ body {
 }
 
 
-/*!* Hide the canvas element as it's used only for capturing the image *!*/
-/*#canvas {*/
-/*    display: none;*/
-/*}*/
+.file-upload-container {
+    text-align: center;
+    margin: 30px auto;
+    padding: 20px;
+    border: 2px dashed #007bff; /* Dashed border */
+    border-radius: 5px;
+    background: lightyellow;
+    width: 605px; /* Adjust based on your preference */
+}
+
+.file-drop-area {
+    position: relative;
+    cursor: pointer;
+}
+
+.upload-btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.file-msg {
+    font-size: 16px;
+    color: #333;
+}
+
+.file-input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.file-info {
+    margin-top: 10px;
+}
 
 
-/* Style the results section for a better presentation */
-#results {
+
+/* Enhance the results section container */
+#modal-results {
     margin-top: 20px;
-    padding: 15px;
-    border: 1px solid #ccc; /* Add a light border */
-    border-radius: 8px; /* Round the corners */
-    background-color: #f9f9f9; /* Light background color for the results area */
-    max-width: 640px; /* Match the width of the video element */
-    margin-left: auto; /* Center align the results div */
-    margin-right: auto; /* Center align the results div */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Add a subtle shadow for depth */
-    text-align: left; /* Align text to the left for readability */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff; /* Change to a pure white for a cleaner look */
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Increase shadow for more depth */
+    text-align: left;
 }
 
-/* Style individual result items for clarity */
+/* Apply a card-like design to each result item */
 .result-item {
-    margin-bottom: 10px; /* Add some space between result items */
-    padding: 5px; /* Add some padding inside each result item */
-    border-bottom: 1px solid #eee; /* Add a light separator line between items */
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: #f9f9f9; /* Slightly off-white background for the card */
+    border-radius: 5px; /* Rounded corners for the card */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Subtle shadow for the card */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
 }
 
-/* Last item should not have a border at the bottom */
-.result-item:last-child {
-    border-bottom: none;
+/* Hover effect for result items */
+.result-item:hover {
+    transform: translateY(-5px); /* Slight lift effect on hover */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Increased shadow on hover for depth */
 }
 
-/* Style the labels within each result item for emphasis */
+/* Styling for labels within each result item */
 .result-label {
-    font-weight: bold; /* Make label text bold */
+    display: block; /* Make label display as block to enforce its own line */
+    margin-bottom: 5px; /* Space between label and value */
+    color: #007bff; /* Use a theme color for labels */
+    font-weight: normal; /* Opt for a normal weight but a different color for emphasis */
+    text-transform: uppercase; /* Capitalize the labels for a more structured look */
+    letter-spacing: 1px; /* Increase letter spacing for a modern touch */
+    font-size: 14px; /* Slightly smaller font size for labels */
 }
 
-/* Style the values within each result item for distinction */
+/* Styling for values within each result item */
 .result-value {
-    margin-left: 10px; /* Add space between label and value */
-    color: #333; /* Darker text color for readability */
+    color: #333; /* Keep the text color dark for readability */
+    font-weight: bold; /* Bold text for value emphasis */
+    font-size: 16px; /* Slightly larger font size for values */
 }
 
+
+
+/* Styling for loader */
+.loader {
+    border: 6px solid #f3f3f3; /* Light grey */
+    border-top: 6px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+    margin: 20px auto; /* Center the loader */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 2; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative; /* Set to relative to act as a positioning context for the close button */
+    background-color: #fefefe;
+    margin: 10% auto; /* 10% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 640px; /* Match the width of the video element */
+    border-radius: 8px; /* Round the corners */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Add a subtle shadow for depth */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute; /* Position the close button absolutely within the modal-content */
+    top: 10px; /* Distance from the top of the modal-content */
+    right: 10px; /* Distance from the right of the modal-content */
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
