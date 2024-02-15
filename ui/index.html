@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver's License Data Extractor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Driver's License Data Extractor <span id="info-icon" class="info-icon">?</span> </h1>
+
+
+    </header>
+
+    <div id="info-tooltip" class="info-tooltip" style="display: none;">
+        <p>Choose how to provide your driver's license image:</p>
+        <ul>
+            <li><strong>Capture:</strong> Use your webcam to take a photo.</li>
+            <li><strong>Upload:</strong> Select an image file from your device.</li>
+        </ul>
+    </div>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modal-results" class="modal-results"></div>
+        </div>
+    </div>
+
+    <!--    webcam and capture button configuration-->
+    <video id="webcam" autoplay playsinline width="640" height="480"></video>
+    <button id="capture" class="btn">Capture</button>
+
+
+    <!--    loader-->
+    <div id="loader" class="loader" style="display: none;"></div>
+
+    <!--    file upload container-->
+    <div class="file-upload-container">
+
+        <!--        file-drop-area-->
+        <div id="file-drop-area" class="file-drop-area">
+            <span class="upload-btn">Choose a file</span>
+            <span class="file-msg">or drag and drop here</span>
+            <input type="file" class="file-input" hidden>
+        </div>
+
+        <!--        gives info of whether a file is selected or not -->
+        <div id="file-info" class="file-info"></div>
+    </div>
+
+    <!-- Hide the canvas element as it's used only for capturing the image -->
+    <canvas id="canvas" width="300" height="200" style="display:none;"></canvas>
+
+</div>
+<script src="script.js"></script>
+</body>
+</html>

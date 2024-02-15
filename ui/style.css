@@ -1,0 +1,264 @@
+body {
+    background: url("wallpaperflare.com_wallpaper (1).jpg");
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px; /* Reduced from 50px to bring content further up */
+}
+
+.container {
+    text-align: center;
+    width: 640px; /* Match the width of the video element */
+    margin: 0 auto; /* Reduced vertical margin to bring content up */
+}
+
+.container header {
+    color: #333; /* Dark grey text for better readability on light background */
+    padding: 15px 0; /* Spacious padding for a more open feel */
+    border-radius: 8px 8px 0 0; /* Rounded corners at the top */
+    text-align: center; /* Center-aligned text */
+    margin-bottom: 20px; /* Space between header and content */
+    background: linear-gradient(135deg, #f9d29d 10%, #fad0c4 100%); /* Soft peach gradient */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: background 0.3s ease; /* Smooth transition for interactive elements */
+}
+
+.container header h1 {
+    font-size: 28px; /* Prominent font size for the heading */
+    font-weight: bold; /* Bold font weight for emphasis */
+    margin: 0; /* Reset default margin */
+    transition: transform 0.3s ease; /* Smooth scale transition on hover */
+}
+
+/* Optional: Hover effect for the header */
+.container header:hover {
+    background: linear-gradient(135deg, #f8c291 10%, #e1eec3 100%); /* Slightly different gradient on hover for a dynamic effect */
+    cursor: pointer; /* Change cursor to indicate interactivity */
+}
+
+.container header h1:hover {
+    transform: scale(1.05); /* Scale up the heading text slightly on hover */
+}
+
+
+
+.info-icon {
+    cursor: pointer;
+    display: inline-block; /* Keeps the icon inline with adjacent elements */
+    font-size: 20px; /* Size of the '?' text */
+    width: 30px; /* Diameter of the circle */
+    height: 30px; /* Diameter of the circle, same as width for a perfect circle */
+    line-height: 30px; /* Centers the '?' vertically */
+    text-align: center; /* Centers the '?' horizontally */
+    border-radius: 50%; /* Rounds the corners to create a circle */
+    background-color: #007bff; /* Background color of the circle */
+    color: #fff; /* Color of the '?' text */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Adds depth with a subtle shadow */
+    transition: background-color 0.3s; /* Smooth transition for the hover effect */
+    margin: 0 20px; /* Adjusts the spacing around the icon */
+    float: right;
+}
+
+
+.info-tooltip {
+    position: absolute; /* Positioned absolutely relative to the nearest positioned ancestor */
+    /* Position the tooltip near the info icon */
+    top: 40px; /* Adjust if needed */
+    right: 150px; /* Position to the left of the icon; adjust as necessary */
+    width: 250px; /* Adjust based on content */
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+.info-tooltip p, .info-tooltip ul {
+    margin: 10px 0;
+    padding: 0;
+    list-style-position: inside;
+}
+
+
+#webcam {
+    border: 3px solid #333; /* Optional: adds a border around the video element */
+    border-radius: 8px; /* Optional: rounds the corners of the video element */
+}
+
+#capture {
+    display: block; /* Makes the button a block element */
+    margin: 20px auto; /* Centers the button horizontally with auto margins and adds space above */
+    padding: 10px 20px; /* Adds padding inside the button for a larger click area */
+    font-size: 16px; /* Increases the font size */
+    color: #fff; /* Sets the text color to white */
+    background-color: #007bff; /* Sets a blue background color */
+    border: none; /* Removes the default border */
+    border-radius: 5px; /* Rounds the button corners */
+    cursor: pointer; /* Changes the cursor to a pointer when hovering over the button */
+    transition: background-color 0.3s ease; /* Adds a transition effect to the background color */
+}
+
+#capture:hover {
+    background-color: #0056b3; /* Darkens the button color slightly on hover for a visual effect */
+}
+
+
+.file-upload-container {
+    text-align: center;
+    margin: 30px auto;
+    padding: 20px;
+    border: 2px dashed #007bff; /* Dashed border */
+    border-radius: 5px;
+    background: lightyellow;
+    width: 605px; /* Adjust based on your preference */
+}
+
+.file-drop-area {
+    position: relative;
+    cursor: pointer;
+}
+
+.upload-btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.file-msg {
+    font-size: 16px;
+    color: #333;
+}
+
+.file-input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.file-info {
+    margin-top: 10px;
+}
+
+
+/* Enhance the results section container */
+#modal-results {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff; /* Change to a pure white for a cleaner look */
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Increase shadow for more depth */
+    text-align: left;
+}
+
+/* Apply a card-like design to each result item */
+.result-item {
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: #f9f9f9; /* Slightly off-white background for the card */
+    border-radius: 5px; /* Rounded corners for the card */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow for the card */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+}
+
+/* Hover effect for result items */
+.result-item:hover {
+    transform: translateY(-5px); /* Slight lift effect on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Increased shadow on hover for depth */
+}
+
+/* Styling for labels within each result item */
+.result-label {
+    display: block; /* Make label display as block to enforce its own line */
+    margin-bottom: 5px; /* Space between label and value */
+    color: #007bff; /* Use a theme color for labels */
+    font-weight: normal; /* Opt for a normal weight but a different color for emphasis */
+    text-transform: uppercase; /* Capitalize the labels for a more structured look */
+    letter-spacing: 1px; /* Increase letter spacing for a modern touch */
+    font-size: 14px; /* Slightly smaller font size for labels */
+}
+
+/* Styling for values within each result item */
+.result-value {
+    color: #333; /* Keep the text color dark for readability */
+    font-weight: bold; /* Bold text for value emphasis */
+    font-size: 16px; /* Slightly larger font size for values */
+}
+
+
+/* Styling for loader */
+.loader {
+    border: 6px solid #f3f3f3; /* Light grey */
+    border-top: 6px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+    margin: 20px auto; /* Center the loader */
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 2; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative; /* Set to relative to act as a positioning context for the close button */
+    background-color: #fefefe;
+    margin: 10% auto; /* 10% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 640px; /* Match the width of the video element */
+    border-radius: 8px; /* Round the corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute; /* Position the close button absolutely within the modal-content */
+    top: 10px; /* Distance from the top of the modal-content */
+    right: 10px; /* Distance from the right of the modal-content */
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}

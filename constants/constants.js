@@ -1,0 +1,1 @@
+exports.FILE_UPLOAD_COUNT = 1

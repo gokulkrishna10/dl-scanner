@@ -1,6 +1,3 @@
-/**
- * Created by Malashree on 31/01/2020.
- */
 exports = module.exports = errors;
 
 var NotFound = require('./NotFound');
@@ -10,7 +7,6 @@ var CallFailed = require('./CallFailed');
 var Unauthorized = require('./Unauthorized');
 var ServiceUnAvailable = require('./ServiceUnAvailable');
 var Forbidden = require('./Forbidden');
-var dbError = require('./DataBaseError');
 var ConflictRequest = require('./ConflictRequest');
 
 function errors() {
@@ -30,6 +26,5 @@ errors.prototype.BadSession = BadSession;
 errors.prototype.CallFailed = CallFailed;
 errors.prototype.Unauthorized = Unauthorized;
 errors.prototype.ServiceUnAvailable = ServiceUnAvailable;
-errors.prototype.dbError = dbError;
 
 errors.prototype.Forbidden = Forbidden;
