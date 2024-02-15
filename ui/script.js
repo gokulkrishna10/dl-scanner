@@ -11,6 +11,9 @@ const fileInput = document.querySelector('.file-input');
 const fileDropArea = document.getElementById('file-drop-area');
 const fileInfo = document.getElementById('file-info');
 
+const infoIcon = document.getElementById('info-icon');
+const infoTooltip = document.getElementById('info-tooltip');
+
 
 // Initialize webcam
 navigator.mediaDevices.getUserMedia(videoConstraints)
@@ -32,7 +35,7 @@ captureButton.addEventListener('click', () => {
     }, 'image/jpeg'); // Specify the image format, if needed
 });
 
-
+// function to call the backend api
 function sendImageToBackend(imageBlob) {
     // Show loader
     document.getElementById('loader').style.display = 'block';
@@ -139,4 +142,19 @@ fileDropArea.addEventListener('drop', (e) => {
         fileInfo.textContent = e.dataTransfer.files[0].name;
         sendImageToBackend(e.dataTransfer.files[0])
     }
+});
+
+
+infoIcon.addEventListener('mouseover', () => {
+    infoTooltip.style.display = 'block';
+});
+
+infoIcon.addEventListener('mouseout', () => {
+    infoTooltip.style.display = 'none';
+});
+
+// Optional: Toggle on click for mobile users
+infoIcon.addEventListener('click', () => {
+    const isDisplayed = infoTooltip.style.display === 'block';
+    infoTooltip.style.display = isDisplayed ? 'none' : 'block';
 });
