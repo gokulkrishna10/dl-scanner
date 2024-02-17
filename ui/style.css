@@ -82,7 +82,6 @@ body {
 }
 
 
-
 #webcam {
     border: 3px solid #333; /* Optional: adds a border around the video element */
     border-radius: 8px; /* Optional: rounds the corners of the video element */
@@ -154,6 +153,7 @@ body {
 
 .file-info {
     margin-top: 10px;
+    position: relative;
 }
 
 

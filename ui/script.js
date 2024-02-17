@@ -11,6 +11,7 @@ const fileInput = document.querySelector('.file-input');
 const fileDropArea = document.getElementById('file-drop-area');
 const fileInfo = document.getElementById('file-info');
 
+
 const infoIcon = document.getElementById('info-icon');
 const infoTooltip = document.getElementById('info-tooltip');
 
@@ -145,6 +146,7 @@ fileDropArea.addEventListener('drop', (e) => {
         sendImageToBackend(e.dataTransfer.files[0])
     }
 });
+
 
 
 infoIcon.addEventListener('mouseover', () => {

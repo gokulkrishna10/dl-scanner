@@ -4,6 +4,7 @@ import sys
 import json
 import os
 
+
 def extract_text(img_path):
     print("---------------------------> Start executing Python script <---------------------------")
 
@@ -24,10 +25,9 @@ def extract_text(img_path):
     resized = cv2.resize(gray, None, fx=2, fy=2, interpolation=cv2.INTER_LINEAR)
     print("Image preprocessed (grayscale and resized).")
 
-    # Save preprocessed image - this can also help in debugging by checking the saved image
     # Get the absolute path of the directory of the current script
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    print("current directory is ------>",current_dir)
+    print("current directory is ------>", current_dir)
 
     # Go up two levels from the current directory to reach the project root
     project_root = os.path.dirname(os.path.dirname(current_dir))
@@ -35,19 +35,35 @@ def extract_text(img_path):
     # Construct the path to the uploads directory
     uploads_dir = os.path.join(project_root, 'uploads')
 
-    # Construct the path for the preprocessed image within the uploads directory
+    # Construct the path for the preprocessed image within the uploads directory (Save preprocessed image - this can also help in debugging by checking the saved image)
     preprocessed_path = os.path.join(uploads_dir, 'temp_preprocessed_image.jpg')
 
     # Save the preprocessed image to the uploads directory
     cv2.imwrite(preprocessed_path, resized)
     print(f"Preprocessed image saved to {preprocessed_path}")
 
+    # Assuming the 'paddle_models' directory is at the root of your project, adjust the path according to your project structure
+    paddle_models_dir = os.path.join(project_root, 'paddle_models')
+
     # Initialize PaddleOCR and run OCR
     print("Initializing PaddleOCR...")
+    #     ocr = PaddleOCR(use_angle_cls=True, lang='en',
+    #                     det_model_dir='/usr/src/app/paddle_models/det/en_PP-OCRv3_det_infer',
+    #                     rec_model_dir= '/usr/src/app/paddle_models/rec/en_PP-OCRv4_rec_infer',
+    #                     cls_model_dir= '/usr/src/app/paddle_models/cls/ch_ppocr_mobile_v2.0_cls_infer')
+
+    # Construct model paths
+    detPath = os.path.join(paddle_models_dir, 'det', 'en_PP-OCRv3_det_infer')
+    recPath = os.path.join(paddle_models_dir, 'rec', 'en_PP-OCRv4_rec_infer')
+    clsPath = os.path.join(paddle_models_dir, 'cls', 'ch_ppocr_mobile_v2.0_cls_infer')
+
+    # Initialize PaddleOCR with dynamic model paths
     ocr = PaddleOCR(use_angle_cls=True, lang='en',
-                    det_model_dir='/usr/src/app/paddle_models/det/en_PP-OCRv3_det_infer',
-                    rec_model_dir= '/usr/src/app/paddle_models/rec/en_PP-OCRv4_rec_infer',
-                    cls_model_dir= '/usr/src/app/paddle_models/cls/ch_ppocr_mobile_v2.0_cls_infer')
+                    det_model_dir=detPath,
+                    rec_model_dir=recPath,
+                    cls_model_dir=clsPath)
+
+
     print("Running OCR on preprocessed image...")
     result = ocr.ocr(preprocessed_path, cls=True)
 
@@ -82,9 +98,6 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"An error occurred during text extraction: {e}")
         sys.exit(1)
-
-
-
 
 # from paddleocr import PaddleOCR
 # import cv2
@@ -136,4 +149,3 @@ if __name__ == "__main__":
 #
 # print("Hello, World!")
 # print(f"Received file path: {sys.argv[1]}")
-
