@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
-    padding-top: 20px; /* Reduced from 50px to bring content further up */
+    padding-top: 10px; /* Reduced from 50px to bring content further up */
 }
 
 .container {
@@ -14,7 +14,7 @@ body {
 
 .container header {
     color: #333; /* Dark grey text for better readability on light background */
-    padding: 15px 0; /* Spacious padding for a more open feel */
+    padding: 5px 0; /* Spacious padding for a more open feel */
     border-radius: 8px 8px 0 0; /* Rounded corners at the top */
     text-align: center; /* Center-aligned text */
     margin-bottom: 20px; /* Space between header and content */
@@ -39,7 +39,6 @@ body {
 .container header h1:hover {
     transform: scale(1.05); /* Scale up the heading text slightly on hover */
 }
-
 
 
 .info-icon {
@@ -67,18 +66,21 @@ body {
     right: 150px; /* Position to the left of the icon; adjust as necessary */
     width: 250px; /* Adjust based on content */
     padding: 10px;
-    background-color: #f9f9f9;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     z-index: 10;
+    background: linear-gradient(145deg, #009688, #004d60); /* Teal to deep blue gradient */
+    color: #fff; /* White text for better contrast */
 }
+
 
 .info-tooltip p, .info-tooltip ul {
     margin: 10px 0;
     padding: 0;
     list-style-position: inside;
 }
+
 
 
 #webcam {
@@ -118,6 +120,13 @@ body {
     position: relative;
     cursor: pointer;
 }
+
+.file-drop-area.active {
+    background-color: #e9ecef; /* Lighter background to indicate active state */
+    border: 2px dashed #007bff; /* Highlighted border style */
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.25); /* Subtle glow effect */
+}
+
 
 .upload-btn {
     background-color: #007bff;

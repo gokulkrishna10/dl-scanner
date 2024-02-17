@@ -129,7 +129,8 @@ fileDropArea.addEventListener('dragover', (e) => {
 });
 
 // Revert drop area style on drag leave
-fileDropArea.addEventListener('dragleave', () => {
+fileDropArea.addEventListener('dragleave', (e) => {
+    e.preventDefault();
     fileDropArea.classList.remove('active');
 });
 
@@ -137,6 +138,7 @@ fileDropArea.addEventListener('dragleave', () => {
 fileDropArea.addEventListener('drop', (e) => {
     e.preventDefault();
     fileDropArea.classList.remove('active');
+
     if (e.dataTransfer.files.length) {
         fileInput.files = e.dataTransfer.files;
         fileInfo.textContent = e.dataTransfer.files[0].name;
