@@ -5,90 +5,51 @@ const path = require('path');
 
 exports.extractImageData = async function (req, callback) {
     try {
-        console.log("inside dao")
+        // Construct the absolute path to the Python script
         const scriptPath = path.join(__dirname, '../src/python/extract_text.py');
-        console.log("scriptPath is - ", scriptPath)
-        const pythonProcess = await spawn('python', [scriptPath, req.file.path]);
-        console.log("python process selected inside dao")
 
+        // Spawn a Python process to run the OCR script with the image file path as an argument
+        const pythonProcess = await spawn('python', [scriptPath, req.file.path]);
+
+        // Listen for data event from the Python process stdout stream
         let outputData = {}
         pythonProcess.stdout.on('data', (data) => {
             console.log(`Extracted Text: ${data}`);
             const dataStr = data.toString();
-            console.log('--------->converted to string <------------ ', dataStr)
-            // Use a regular expression to find the JSON part in the output
+
+            // Use a regular expression to extract the JSON string that represents the extracted text
             const matches = dataStr.match(/\{"extractedText":.*?\}/);
-            console.log('--------->match completed <------------  ', matches)
             if (matches) {
                 const jsonPart = matches[0];
                 console.log(`JSON Part: ${jsonPart}`);
                 try {
+                    // Parse the JSON string to an object
                     const result = JSON.parse(jsonPart);
-                    // call the helper function to map the output fields
+
+                    // Call a helper function to map the OCR output to a desired format
                     outputData = dlScannerHelperMapper.convertOcrOutputToJson(result.extractedText)
                     console.log(outputData)
                 } catch (e) {
+                    // Log errors if JSON parsing fails
                     console.error("Error parsing JSON:", e);
                 }
             }
         });
 
+        // Listen for data event from the Python process stderr stream
         pythonProcess.stderr.on('data', (data) => {
-            console.log("inside stderr dao")
-            console.error(`Error: ${data}`);
+            // Log any errors that occur during the execution of the Python script
+            console.error(`Error inside stderr dao : ${data}`);
         });
 
+        // Listen for the close event of the Python process
         pythonProcess.on('close', (code) => {
+            // Log the exit code of the Python process
             console.log(`Child process exited with code ${code}`);
             callback(null, outputData)
         });
     } catch (e) {
+        // Log any errors that occur during the setup or execution of the Python process
         console.log("Inside the catch block. Something failed : ", e)
     }
 }
-
-// try {
-//     // Preprocess the image
-//
-//     // Use path.basename() to extract the filename from the full path
-//     const originalImageName = path.basename(req.file.path);
-//
-//     // Prefix the original filename with 'preprocessed-'
-//     const preprocessedImageName = `preprocessed-${originalImageName}`;
-//
-//     // Construct the full path for the preprocessed image in the 'uploads' directory
-//     const preprocessedImagePath = path.join(__dirname, '../uploads', preprocessedImageName);
-//     preprocessImage(req.file.path, preprocessedImagePath)
-//         .then(() => {
-//             const tesseractsConfig = {lang: 'eng', oem: 1, psm: 3};
-//             tesseracts.recognize(req.file.path, tesseractsConfig)
-//                 .then(text => {
-//                     console.log("Result : ", text)
-//                     let licenseInfoObject = dlScannerHelperMapper.convertOcrOutputToJson(text)
-//                     callback(null, licenseInfoObject)
-//                 })
-//                 .catch(err => {
-//                     console.log(err.message)
-//                     callback(err, null)
-//                 })
-//         })
-//         .catch(error => {
-//             console.log("Something failed : ", error)
-//         })
-//         .finally(() => {
-//             console.log("Preprocessing completed")
-//         });
-//
-// } catch (error) {
-//     console.log(error)
-// }
-
-// const preprocessImage = (inputPath, outputPath) => {
-//     return sharp(inputPath)
-//         .grayscale() // Convert to grayscale
-//         .resize(800) // Resize to a width of 800 pixels while maintaining aspect ratio
-//         .sharpen() // Sharpen the image
-//         .threshold(135) // Apply thresholding to make the image more OCR-friendly
-//         .toFile(outputPath); // Save the preprocessed image
-// };
-

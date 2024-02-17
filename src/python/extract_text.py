@@ -6,11 +6,10 @@ import os
 
 
 def extract_text(img_path):
-    print("---------------------------> Start executing Python script <---------------------------")
-
     # Log the image path received
     print(f"Received image path: {img_path}")
 
+    # Reads the image from the specified path.
     image = cv2.imread(img_path)
 
     # Check if the image is loaded successfully
@@ -27,7 +26,6 @@ def extract_text(img_path):
 
     # Get the absolute path of the directory of the current script
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    print("current directory is ------>", current_dir)
 
     # Go up two levels from the current directory to reach the project root
     project_root = os.path.dirname(os.path.dirname(current_dir))
@@ -35,38 +33,27 @@ def extract_text(img_path):
     # Construct the path to the uploads directory
     uploads_dir = os.path.join(project_root, 'uploads')
 
-    # Construct the path for the preprocessed image within the uploads directory (Save preprocessed image - this can also help in debugging by checking the saved image)
+    # Saves the preprocessed image in the 'uploads' directory for further use or debugging.
     preprocessed_path = os.path.join(uploads_dir, 'temp_preprocessed_image.jpg')
-
-    # Save the preprocessed image to the uploads directory
     cv2.imwrite(preprocessed_path, resized)
     print(f"Preprocessed image saved to {preprocessed_path}")
 
-    # Assuming the 'paddle_models' directory is at the root of your project, adjust the path according to your project structure
+    # Constructs the paths to the PaddleOCR model directories.
     paddle_models_dir = os.path.join(project_root, 'paddle_models')
-
-    # Initialize PaddleOCR and run OCR
-    print("Initializing PaddleOCR...")
-    #     ocr = PaddleOCR(use_angle_cls=True, lang='en',
-    #                     det_model_dir='/usr/src/app/paddle_models/det/en_PP-OCRv3_det_infer',
-    #                     rec_model_dir= '/usr/src/app/paddle_models/rec/en_PP-OCRv4_rec_infer',
-    #                     cls_model_dir= '/usr/src/app/paddle_models/cls/ch_ppocr_mobile_v2.0_cls_infer')
-
-    # Construct model paths
     detPath = os.path.join(paddle_models_dir, 'det', 'en_PP-OCRv3_det_infer')
     recPath = os.path.join(paddle_models_dir, 'rec', 'en_PP-OCRv4_rec_infer')
     clsPath = os.path.join(paddle_models_dir, 'cls', 'ch_ppocr_mobile_v2.0_cls_infer')
 
-    # Initialize PaddleOCR with dynamic model paths
+    # Initializes PaddleOCR with the specified model paths.
+    print("Initializing PaddleOCR...")
     ocr = PaddleOCR(use_angle_cls=True, lang='en',
                     det_model_dir=detPath,
                     rec_model_dir=recPath,
                     cls_model_dir=clsPath)
 
-
+    # Runs OCR on the preprocessed image and logs the extracted text.
     print("Running OCR on preprocessed image...")
     result = ocr.ocr(preprocessed_path, cls=True)
-
     res = ""  # Initialize an empty string to accumulate extracted text
     for line in result:
         for info in line:
@@ -80,7 +67,9 @@ def extract_text(img_path):
 
     return res.strip()  # Return the accumulated text, removing any trailing newlines
 
+
 if __name__ == "__main__":
+    # Checks for an image path argument.
     if len(sys.argv) < 2:
         print("Error: No image path provided")
         sys.exit(1)
@@ -88,64 +77,13 @@ if __name__ == "__main__":
     image_path = sys.argv[1]
 
     try:
-        print('Starting text extraction...')
+        # Extracts text from the provided image path.
         extracted_text = extract_text(image_path)
-        print('Text extraction completed.')
 
         # Construct output JSON and print
         output = {"extractedText": extracted_text}
         print(json.dumps(output))  # Print the extracted text as JSON
     except Exception as e:
+        # Handles any exceptions that occur during text extraction.
         print(f"An error occurred during text extraction: {e}")
         sys.exit(1)
-
-# from paddleocr import PaddleOCR
-# import cv2
-# import sys
-# import json
-#
-#
-# def extract_text(img_path):
-#     print("--------------------------->executing python script<---------------------------")
-#     image = cv2.imread(img_path)
-#     if image is None:
-#             print(f"Error: Unable to read image at {img_path}")
-#             return ""
-#
-#     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-#     resized = cv2.resize(gray, None, fx=2, fy=2, interpolation=cv2.INTER_LINEAR)
-#
-#     preprocessed_path = '../uploads/temp_preprocessed_image.jpg'
-#     cv2.imwrite(preprocessed_path, resized)
-#
-#     ocr = PaddleOCR(use_angle_cls=True, lang='en')
-#     result = ocr.ocr(preprocessed_path, cls=True)
-#
-#     res = ""  # Initialize an empty string to accumulate extracted text
-#     for line in result:
-#         for info in line:
-#             res += info[1][0] + "\n"  # Append the text with a newline
-#
-#     return res.strip()  # Return the accumulated text, removing any trailing newlines
-#
-#
-# if __name__ == "__main__":
-#     if len(sys.argv) < 2:
-#         print("Error: No image path provided")
-#         sys.exit(1)
-#     image_path = sys.argv[1]
-#     try:
-# #         print('going inside the function')
-#         extracted_text = extract_text(image_path)
-# #         print('came outside the function')
-#         output = {"extractedText": extracted_text}
-#         print(json.dumps(output))  # Print the extracted text
-#     except Exception as e:
-#         print(f"Error: {e}")
-#         sys.exit(1)
-
-# (temporary version for testing)
-# import sys
-#
-# print("Hello, World!")
-# print(f"Received file path: {sys.argv[1]}")
