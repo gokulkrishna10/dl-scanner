@@ -10,6 +10,8 @@ const videoConstraints = {
 const fileInput = document.querySelector('.file-input');
 const fileDropArea = document.getElementById('file-drop-area');
 const fileInfo = document.getElementById('file-info');
+const removeFileBtn = document.querySelector('.remove-file');
+
 
 const infoIcon = document.getElementById('info-icon');
 const infoTooltip = document.getElementById('info-tooltip');
@@ -116,9 +118,11 @@ fileInput.addEventListener('change', function () {
     if (this.files && this.files[0]) {
         const file = this.files[0];
         fileInfo.textContent = file.name; // Update the message with the file name
+        removeFileBtn.style.display = 'inline'; // Show the remove file button
         sendImageToBackend(file); // Send the file to the backend
     } else {
         fileInfo.textContent = 'No file chosen'; // Update the message if no file is selected
+        removeFileBtn.style.display = 'none'; // Hide the remove file button
     }
 });
 
@@ -144,6 +148,19 @@ fileDropArea.addEventListener('drop', (e) => {
         fileInfo.textContent = e.dataTransfer.files[0].name;
         sendImageToBackend(e.dataTransfer.files[0])
     }
+});
+
+
+// Event listener for the remove/cancel button
+removeFileBtn.addEventListener('click', () => {
+    // Clear the file input value
+    fileInput.value = '';
+
+    // Update the file info text
+    fileInfo.textContent = 'No file chosen';
+
+    // Hide the remove file button
+    removeFileBtn.style.display = 'none';
 });
 
 

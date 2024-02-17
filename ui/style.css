@@ -82,7 +82,6 @@ body {
 }
 
 
-
 #webcam {
     border: 3px solid #333; /* Optional: adds a border around the video element */
     border-radius: 8px; /* Optional: rounds the corners of the video element */
@@ -127,6 +126,13 @@ body {
     box-shadow: 0 0 10px rgba(0, 123, 255, 0.25); /* Subtle glow effect */
 }
 
+.remove-file {
+    cursor: pointer;
+    margin-left: 10px;
+    color: #ff0000; /* Red color for the cross mark */
+    font-weight: bold;
+}
+
 
 .upload-btn {
     background-color: #007bff;
@@ -154,6 +160,7 @@ body {
 
 .file-info {
     margin-top: 10px;
+    position: relative;
 }
 
 
