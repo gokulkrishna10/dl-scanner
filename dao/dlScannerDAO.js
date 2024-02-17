@@ -1,17 +1,24 @@
 const dlScannerHelperMapper = require('../helpers/dlScannerHelper')
 const {spawn} = require('child_process');
+const path = require('path');
 
 
 exports.extractImageData = async function (req, callback) {
     try {
-        const pythonProcess = await spawn('../src/python/venv/Scripts/python.exe', ['../src/python/extract_text.py', req.file.path]);
+        console.log("inside dao")
+        const scriptPath = path.join(__dirname, '../src/python/extract_text.py');
+        console.log("scriptPath is - ", scriptPath)
+        const pythonProcess = await spawn('python', [scriptPath, req.file.path]);
+        console.log("python process selected inside dao")
 
         let outputData = {}
         pythonProcess.stdout.on('data', (data) => {
             console.log(`Extracted Text: ${data}`);
             const dataStr = data.toString();
+            console.log('--------->converted to string <------------ ', dataStr)
             // Use a regular expression to find the JSON part in the output
             const matches = dataStr.match(/\{"extractedText":.*?\}/);
+            console.log('--------->match completed <------------  ', matches)
             if (matches) {
                 const jsonPart = matches[0];
                 console.log(`JSON Part: ${jsonPart}`);
@@ -27,6 +34,7 @@ exports.extractImageData = async function (req, callback) {
         });
 
         pythonProcess.stderr.on('data', (data) => {
+            console.log("inside stderr dao")
             console.error(`Error: ${data}`);
         });
 
