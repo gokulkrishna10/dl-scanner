@@ -2,6 +2,7 @@ from paddleocr import PaddleOCR
 import cv2
 import sys
 import json
+import os
 
 def extract_text(img_path):
     print("---------------------------> Start executing Python script <---------------------------")
@@ -24,7 +25,20 @@ def extract_text(img_path):
     print("Image preprocessed (grayscale and resized).")
 
     # Save preprocessed image - this can also help in debugging by checking the saved image
-    preprocessed_path = 'temp_preprocessed_image.jpg'
+    # Get the absolute path of the directory of the current script
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    print("current directory is ------>",current_dir)
+
+    # Go up two levels from the current directory to reach the project root
+    project_root = os.path.dirname(os.path.dirname(current_dir))
+
+    # Construct the path to the uploads directory
+    uploads_dir = os.path.join(project_root, 'uploads')
+
+    # Construct the path for the preprocessed image within the uploads directory
+    preprocessed_path = os.path.join(uploads_dir, 'temp_preprocessed_image.jpg')
+
+    # Save the preprocessed image to the uploads directory
     cv2.imwrite(preprocessed_path, resized)
     print(f"Preprocessed image saved to {preprocessed_path}")
 
