@@ -1,3 +1,4 @@
+// Function to convert OCR output text to a structured JSON object
 exports.convertOcrOutputToJson = function (ocrText) {
     // Define patterns for each field to be extracted from the OCR text
     const patterns = {
@@ -21,6 +22,7 @@ exports.convertOcrOutputToJson = function (ocrText) {
         address: ''
     };
 
+    // Iterate over each pattern and attempt to find a match in the OCR text
     Object.keys(patterns).forEach((key) => {
         const regex = patterns[key];
         const match = ocrText.match(regex);

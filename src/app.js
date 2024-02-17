@@ -77,7 +77,7 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage});
 
 
-// extract data from image
+// extract data from drivers license
 router.post('/extract-data', upload.single('dl', constants.FILE_UPLOAD_COUNT), dlScannerValidator.validateExtractImageData, routes.extractImageData)
 
 

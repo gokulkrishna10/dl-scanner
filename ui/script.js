@@ -1,48 +1,57 @@
+// Access the webcam and canvas elements from the HTML document
 const webcamElement = document.getElementById('webcam');
 const canvasElement = document.getElementById('canvas');
 const captureButton = document.getElementById('capture');
+
+// Define video constraints for the webcam feed
 const videoConstraints = {
     video: true,
     width: 640,
     height: 480
 };
 
+// Access file input and drag-and-drop area elements
 const fileInput = document.querySelector('.file-input');
 const fileDropArea = document.getElementById('file-drop-area');
 const fileInfo = document.getElementById('file-info');
 
 
+// Access elements for displaying tooltips
 const infoIcon = document.getElementById('info-icon');
 const infoTooltip = document.getElementById('info-tooltip');
 
 
-// Initialize webcam
+// Initialize the webcam by requesting access to the device's camera
 navigator.mediaDevices.getUserMedia(videoConstraints)
     .then(stream => {
+        // Assign the media stream to the video element's srcObject to display the feed
         webcamElement.srcObject = stream;
     })
     .catch(err => {
+        // Log any errors that occur during this process
         console.log('Error accessing the webcam', err);
     });
 
 // Capture event
 captureButton.addEventListener('click', () => {
+    // Get the 2D drawing context of the canvas
     const context = canvasElement.getContext('2d');
+    // Draw the current frame from the webcam onto the canvas
     context.drawImage(webcamElement, 0, 0, canvasElement.width, canvasElement.height);
 
-    // Convert the canvas content to a Blob
+    // Convert the canvas content to a Blob and send it to the backend
     canvasElement.toBlob(blob => {
         sendImageToBackend(blob)
     }, 'image/jpeg'); // Specify the image format, if needed
 });
 
-// helper to select the url dynamically
+// Function to dynamically determine the API base URL based on the hostname
 function getApiBaseUrl() {
     const hostname = window.location.hostname;
     if (hostname === "localhost" || hostname === "127.0.0.1") {
-        return `http://localhost:8000`;
+        return `http://localhost:8000`; // Use the local server for development
     } else {
-        return `https://dl-scanner.onrender.com`;
+        return `https://dl-scanner.onrender.com`; // Use the production server otherwise
     }
 }
 
@@ -81,14 +90,17 @@ function sendImageToBackend(imageBlob) {
 
 // Display the extracted data
 function displayResults(data) {
+    // Access the modal element and clear any previous results
     const modalResultsElement = document.getElementById('modal-results');
     modalResultsElement.innerHTML = ''; // Clear previous results
 
     // Iterate over each key-value pair in the data object and create styled elements for display
     for (const [key, value] of Object.entries(data)) {
+        // Create a container for each result item
         const itemDiv = document.createElement('div');
         itemDiv.classList.add('result-item');
 
+        // Create and style elements for the label and value
         const labelSpan = document.createElement('span');
         labelSpan.classList.add('result-label');
         labelSpan.textContent = `${key}: `;
@@ -97,6 +109,7 @@ function displayResults(data) {
         valueSpan.classList.add('result-value');
         valueSpan.textContent = value;
 
+        // Append the label and value to the item container, and the container to the modal
         itemDiv.appendChild(labelSpan);
         itemDiv.appendChild(valueSpan);
         modalResultsElement.appendChild(itemDiv);
@@ -115,11 +128,11 @@ function displayResults(data) {
     }
 
     // When the user clicks anywhere outside the modal, close it
-    window.onclick = function (event) {
-        if (event.target === modal) {
-            modal.style.display = "none";
-        }
-    }
+    // window.onclick = function (event) {
+    //     if (event.target === modal) {
+    //         modal.style.display = "none";
+    //     }
+    // }
 }
 
 
@@ -162,6 +175,7 @@ fileDropArea.addEventListener('drop', (e) => {
 });
 
 
+// Tooltip display logic for the info icon
 infoIcon.addEventListener('mouseover', () => {
     infoTooltip.style.display = 'block';
 });
