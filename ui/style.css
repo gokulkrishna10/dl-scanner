@@ -126,13 +126,6 @@ body {
     box-shadow: 0 0 10px rgba(0, 123, 255, 0.25); /* Subtle glow effect */
 }
 
-.remove-file {
-    cursor: pointer;
-    margin-left: 10px;
-    color: #ff0000; /* Red color for the cross mark */
-    font-weight: bold;
-}
-
 
 .upload-btn {
     background-color: #007bff;
