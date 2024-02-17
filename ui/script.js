@@ -36,6 +36,17 @@ captureButton.addEventListener('click', () => {
     }, 'image/jpeg'); // Specify the image format, if needed
 });
 
+// helper to select the url dynamically
+function getApiBaseUrl() {
+    const hostname = window.location.hostname;
+    if (hostname === "localhost" || hostname === "127.0.0.1") {
+        return `http://localhost:8000`;
+    } else {
+        return `https://dl-scanner.onrender.com`;
+    }
+}
+
+
 // function to call the backend api
 function sendImageToBackend(imageBlob) {
     // Show loader
@@ -45,8 +56,11 @@ function sendImageToBackend(imageBlob) {
     const formData = new FormData();
     formData.append('dl', imageBlob, 'driver-license.jpg'); // 'dl' is the field name expected by the backend
 
+    // Define the API endpoint
+    const apiEndpoint = `${getApiBaseUrl()}/extract-data`;
+
     // Send the FormData with the image to the backend
-    fetch('http://localhost:8000/extract-data', {
+    fetch(apiEndpoint, {
         method: 'POST',
         body: formData,
         // Note: Don't set Content-Type header when using FormData, the browser will set it automatically
@@ -146,7 +160,6 @@ fileDropArea.addEventListener('drop', (e) => {
         sendImageToBackend(e.dataTransfer.files[0])
     }
 });
-
 
 
 infoIcon.addEventListener('mouseover', () => {
