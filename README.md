@@ -102,13 +102,18 @@ The application follows a client-server architecture with a frontend and backend
 ## Sample Driver's license images for testing
 
 - Image 1
-![Image 1](./sample_dl_images/img1.png)
 
+
+![Alt Text](./sample_dl_images/img1.png)
 
 - Image 2
+
+
 ![Alt Text](./sample_dl_images/img2.png)
 
 
 - Image 3
+
+
 ![Alt Text](./sample_dl_images/img3.png)
 
