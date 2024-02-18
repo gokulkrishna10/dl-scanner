@@ -53,7 +53,11 @@ def extract_text(img_path):
 
     # Runs OCR on the preprocessed image and logs the extracted text.
     print("Running OCR on preprocessed image...")
+    print("------------->Result computing -------->")
+
     result = ocr.ocr(preprocessed_path, cls=True)
+
+    print("------------->Result computed -------->", result)
     res = ""  # Initialize an empty string to accumulate extracted text
     for line in result:
         for info in line:
