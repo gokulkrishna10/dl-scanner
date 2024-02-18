@@ -23,7 +23,7 @@ The application follows a client-server architecture with a frontend and backend
 - Webcam API for capturing images from the user's webcam.
 
 ### 3. Virtual environment
-- Set up a virtual environment (venv) using a Python version that supports all the necessary Python libraries and modules.
+- Set up a virtual environment (venv) that encapsulates all the necessary Python libraries and modules with the required python version.
 
 ### 4. Dockerfile
 
@@ -32,37 +32,37 @@ The application follows a client-server architecture with a frontend and backend
 ## Development Obstacles
 
 ### 1. Text Extraction Accuracy
-- Obstacle: The project initially utilized the Tesseract OCR library with the Sharp image processing library in a Node.js environment for text extraction from images. However, the results were unsatisfactory, with poor accuracy and frequent failures in text recognition.
-- Solution: To enhance text extraction accuracy, the project transitioned to a Python-based OCR library known for its superior performance. This required spawning a child process from the Node.js API service to execute the Python script and retrieve the extracted text, introducing an inter-language integration.
+- **Obstacle**: The project initially utilized the Tesseract OCR library with the Sharp image processing library in a Node.js environment for text extraction from images. However, the results were unsatisfactory, with poor accuracy and frequent failures in text recognition.
+- **Solution**: To enhance text extraction accuracy, the project transitioned to a Python-based OCR library known for its superior performance. This required spawning a child process from the Node.js API service to execute the Python script and retrieve the extracted text, introducing an inter-language integration.
 
 ### 2. Python Version Compatibility with PaddleOCR
-- Obstacle: Initially faced difficulties installing PaddleOCR, which seemed unresponsive without clear errors.
-- Solution: Investigation revealed PaddleOCR's incompatibility with the latest Python versions. It was discovered that PaddleOCR is only compatible with Python 3.10, 3.7, and a few earlier versions. Adjusting the Python environment to a compatible version resolved the issue.
+- **Obstacle**: Initially faced difficulties installing PaddleOCR, which seemed unresponsive without clear errors.
+- **Solution**: Investigation revealed PaddleOCR's incompatibility with the latest Python versions. It was discovered that PaddleOCR is only compatible with Python 3.10, 3.7, and a few earlier versions. Adjusting the Python environment to a compatible version resolved the issue.
 
 ### 3. Docker Deployment
-- Obstacle: Faced issues with Docker. The problem was with the libraries required for text extraction; they needed to download additional data every time the service ran, which not only slowed things down but also caused a segmentation fault, leading to confusion.
-- Solution: After some research, I learned that I could pre-download these necessary files and have them available locally. This way, when the service ran, it didn't need to download anything on the fly, which solved the speed issue and the segmentation fault. However, Docker didn't provide clear error messages, so figuring this out took some time.
+- **Obstacle**: Faced issues with Docker. The problem was with the libraries required for text extraction; they needed to download additional data every time the service ran, which not only slowed things down but also caused a segmentation fault, leading to confusion.
+- **Solution**: After some research, I learned that I could pre-download these necessary files and have them available locally. This way, when the service ran, it didn't need to download anything on the fly, which solved the speed issue and the segmentation fault. However, Docker didn't provide clear error messages, so figuring this out took some time.
 
 
 ## Assumptions
 
-- Image Quality: The accuracy of text extraction heavily depends on the image's clarity. Assumed users have access to decent-quality cameras and well-lit environments.
-- License Variations: Driver's licenses vary significantly across regions in layout and information presented. The current version targets a specific format. 
+- **Image Quality**: The accuracy of text extraction heavily depends on the image's clarity. Assumed users have access to decent-quality cameras and well-lit environments.
+- **License Variations**: Driver's licenses vary significantly across regions in layout and information presented. The current version targets a specific format. 
 - The format and labels allowed for these fields are given below. All field labels are case-insensitive.
-  - License Number
+  - **License Number**
     - Allowed labels : `DL, ID, DLN, LIC. NO.` 
     - Note : For the "LIC. No." label, the format permits up to one dot following "LIC", a maximum of one space allowed after the dot and before "NO", and up to one dot following "NO".
-  - First Name
+  - **First Name**
     - Allowed labels : `FN, FIRSTNAME, FIRST NAME`
-  - Last Name
+  - **Last Name**
     - Allowed labels : `LN, LASTNAME, LAST NAME`
-  - Date of Birth (MM/DD/YYYY)
+  - **Date of Birth** (MM/DD/YYYY)
     - Allowed labels : `DOB, D.O.B`
-  - DL issuance date (MM/DD/YYYY)
+  - **DL issuance date** (MM/DD/YYYY)
     - Allowed labels : `ISSUANCE, ISSUED, ISSUE DATE, ISSUEDATE, ISS`
-  - DL expiration date (MM/DD/YYYY)
+  - **DL expiration date** (MM/DD/YYYY)
     - Allowed labels : `EXP, EXPIRES, EXPIRATION DATE, EXPIRATIONDATE, VALID THROUGH, VALIDTHROUGH`
-  - Address
+  - **Address**
     - Allowed labels : `ADDRESS`
     - Below is a breakdown of the required address format
       1. Primary Address: This includes house number, street name, and street type `(e.g., St, Street, Rd, Road, Ave, Avenue, Blvd, Boulevard, Lane, Ln, Drive, Dr, Court, Ct, Circle, Cir)`. 
