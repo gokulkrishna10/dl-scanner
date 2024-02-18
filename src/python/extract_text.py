@@ -55,7 +55,8 @@ def extract_text(img_path):
     result = []
     try:
         print("Running OCR on preprocessed image...")
-        result = ocr.ocr(preprocessed_path, cls=True)
+#         result = ocr.ocr(preprocessed_path, cls=True)
+        result = ocr.ocr(preprocessed_path)
     except Exception as e:
         print(f"OCR processing failed: {e}")
 
