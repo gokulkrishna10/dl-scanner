@@ -1,5 +1,7 @@
 # Driver's License Data Extractor
 
+Website URL - `https://license-scanner.onrender.com`
+
 This web application is designed to extract information from a driver's license either by uploading an image or using a webcam to capture the license directly. In cases where the data extracted from an image captured via webcam is not accurate, it is recommended to use the Upload File feature. This is due to the fact that webcam images may not always be of the highest quality. Uploading a higher quality image of the driver's license can significantly improve the precision of the data extraction process.
 
 ## Architecture and Requirements
@@ -67,17 +69,17 @@ The application follows a client-server architecture with a frontend and backend
     - Below is a breakdown of the required address format
       1. Primary Address: This includes house number, street name, and street type `(e.g., St, Street, Rd, Road, Ave, Avenue, Blvd, Boulevard, Lane, Ln, Drive, Dr, Court, Ct, Circle, Cir)`. 
          - Examples:
-           - 123 Main St 
-           - 456 Oak Blvd Apt 101
-           - 789 Pine Lane #5
+           - `123 Main St` 
+           - `456 Oak Blvd Apt 101`
+           - `789 Pine Lane #5`
       2. Optional Apartment/Unit Number: If applicable, include apartment, unit, building, or number after the street name, prefixed with `"Apt", "Unit", "Bldg", or "#"`.
-      3. City: The city name should follow the street, separated by a comma or space.
+      3. City: The city name should follow the street, separated by a space.
       4. State: Use the two-letter state abbreviation.
       5. ZIP Code: A 5-digit ZIP code should conclude the address.
     - Example Addresses : Here are some examples of valid addresses according to the pattern:
-      - `123 Maple Ave, Springfield, IL 62704`
-      - `456 Elm St Apt 2, Anytown, CA 90210`
-      - `789 Oak Blvd #5, Metropolis, NY 10001`
+      - `123 Maple Ave Springfield IL 62704`
+      - `456 Elm St Apt 2 Anytown CA 90210`
+      - `789 Oak Blvd #5 Metropolis NY 10001`
       
 - Zero or more spaces may precede the corresponding value of these field labels, extending to the end of the line.
 
@@ -97,4 +99,9 @@ The application follows a client-server architecture with a frontend and backend
 6. Open the local version of the application in a web browser
 
 
+## Sample Driver's license representation
+
+- ![Alt Text](./sample_dl_images/img1.png)
+- ![Alt Text](./sample_dl_images/img2.png)
+- ![Alt Text](./sample_dl_images/img3.png)
 
