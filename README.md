@@ -1,6 +1,6 @@
 # Driver's License Data Extractor
 
-Website URL - `https://license-scanner.onrender.com`
+**Website URL** - [Driver's License Data Extractor](https://license-scanner.onrender.com)
 
 This web application is designed to extract information from a driver's license either by uploading an image or using a webcam to capture the license directly. In cases where the data extracted from an image captured via webcam is not accurate, it is recommended to use the Upload File feature. This is due to the fact that webcam images may not always be of the highest quality. Uploading a higher quality image of the driver's license can significantly improve the precision of the data extraction process.
 
