@@ -57,7 +57,10 @@ def extract_text(img_path):
     print("------------->Preprocessed path is :  -------->", preprocessed_path)
     print("------------->OCR is :  -------->", ocr)
 
-    result = ocr.ocr(preprocessed_path, cls=True)
+    try:
+        result = ocr.ocr(preprocessed_path, cls=True)
+    except Exception as e:
+        print(f"OCR processing failed: {e}")
 
     print("------------->Result computed -------->", result)
     res = ""  # Initialize an empty string to accumulate extracted text
