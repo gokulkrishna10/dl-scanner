@@ -54,6 +54,8 @@ def extract_text(img_path):
     # Runs OCR on the preprocessed image and logs the extracted text.
     print("Running OCR on preprocessed image...")
     print("------------->Result computing -------->")
+    print("------------->Preprocessed path is :  -------->", preprocessed_path)
+    print("------------->OCR is :  -------->", ocr)
 
     result = ocr.ocr(preprocessed_path, cls=True)
 
