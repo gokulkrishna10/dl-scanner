@@ -52,17 +52,13 @@ def extract_text(img_path):
                     cls_model_dir=clsPath)
 
     # Runs OCR on the preprocessed image and logs the extracted text.
-    print("Running OCR on preprocessed image...")
-    print("------------->Result computing -------->")
-    print("------------->Preprocessed path is :  -------->", preprocessed_path)
-    print("------------->OCR is :  -------->", ocr)
-
+    result = []
     try:
+        print("Running OCR on preprocessed image...")
         result = ocr.ocr(preprocessed_path, cls=True)
     except Exception as e:
         print(f"OCR processing failed: {e}")
 
-    print("------------->Result computed -------->", result)
     res = ""  # Initialize an empty string to accumulate extracted text
     for line in result:
         for info in line:
