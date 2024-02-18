@@ -46,7 +46,7 @@ def extract_text(img_path):
 
     # Initializes PaddleOCR with the specified model paths.
     print("Initializing PaddleOCR...")
-    ocr = PaddleOCR(use_angle_cls=True, lang='en',
+    ocr = PaddleOCR(use_angle_cls=True, lang='en', show_log=True,
                     det_model_dir=detPath,
                     rec_model_dir=recPath,
                     cls_model_dir=clsPath)
@@ -55,8 +55,7 @@ def extract_text(img_path):
     result = []
     try:
         print("Running OCR on preprocessed image...")
-#         result = ocr.ocr(preprocessed_path, cls=True)
-        result = ocr.ocr(preprocessed_path)
+        result = ocr.ocr(preprocessed_path, cls=True)
     except Exception as e:
         print(f"OCR processing failed: {e}")
 
