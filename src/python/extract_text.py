@@ -3,11 +3,15 @@ import cv2
 import sys
 import json
 import os
+from PIL import Image
 
 
 def extract_text(img_path):
     # Log the image path received
     print(f"Received image path: {img_path}")
+    img = Image.open(img_path)
+    rgb_im = img.convert('RGB')
+    rgb_im.save(img_path)
 
     # Reads the image from the specified path.
     image = cv2.imread(img_path)
