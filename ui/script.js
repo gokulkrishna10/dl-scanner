@@ -51,7 +51,7 @@ function getApiBaseUrl() {
     if (hostname === "localhost" || hostname === "127.0.0.1") {
         return `http://localhost:8000`; // Use the local server for development
     } else {
-        return `https://dl-scanner.onrender.com`; // Use the production server otherwise
+        return `https://dl-scanner2.onrender.com`; // Use the production server otherwise
     }
 }
 
