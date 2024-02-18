@@ -46,7 +46,7 @@ def extract_text(img_path):
 
     # Initializes PaddleOCR with the specified model paths.
     print("Initializing PaddleOCR...")
-    ocr = PaddleOCR(use_angle_cls=True, lang='en', show_log=True,
+    ocr = PaddleOCR(use_angle_cls=True, lang='en',
                     det_model_dir=detPath,
                     rec_model_dir=recPath,
                     cls_model_dir=clsPath)
