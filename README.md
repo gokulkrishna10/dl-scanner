@@ -99,27 +99,15 @@ The application follows a client-server architecture with a frontend and backend
 6. Open the local version of the application in a web browser
 
 
-## Sample Driver's license images for testing
+## Sample Driver's license image for testing
 
 
 - Image 1
 
 
 
-![Alt Text](./sample_dl_images/img1.png)
-
-
-- Image 2
+![Alt Text](sample_dl_image/img1.jpg)
 
 
 
-![Alt Text](./sample_dl_images/img2.png)
-
-
-
-- Image 3
-
-
-
-![Alt Text](./sample_dl_images/img3.png)
 
